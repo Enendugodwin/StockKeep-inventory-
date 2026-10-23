@@ -2,46 +2,46 @@
 
 A native Windows inventory application for small businesses: products, stock
 receiving, auditable adjustments, multi-item sales with refunds, automatic daily
-reports, monthly summaries and verified backups ÔÇö all in one PySide6 desktop app.
+reports, monthly summaries and verified backups — all in one PySide6 desktop app.
 No browser, no web server, no JavaScript: the UI is Qt widgets, the data is SQLite.
 
 ![Dashboard](docs/dashboard.png)
 
 ## Highlights
 
-- **Role-based access** ÔÇö sign in as Admin, Owner or Base user, or create custom
+- **Role-based access** — sign in as Admin, Owner or Base user, or create custom
   roles with exactly the sections and actions you choose.  The default Owner runs
   the operation but cannot open Settings or Audit; Base users get the dashboard,
   the sale counter and read-only transactions.  Access is enforced in navigation
   and in the services.
-- **Native desktop UI** ÔÇö PySide6 widgets only, with light/dark themes, a
+- **Native desktop UI** — PySide6 widgets only, with light/dark themes, a
   persistent sidebar, sortable model/view tables, native dialogs and keyboard
   shortcuts.
-- **Exact money and quantities** ÔÇö money is stored as integer minor units
+- **Exact money and quantities** — money is stored as integer minor units
   (kobo/cents) and quantities as integer thousandths (3 decimal places), using
   `Decimal` at the edges. No binary floating point touches financial totals.
   Stock units include pcs, kg, g, litre, ml, pack, box, carton, bag, dozen,
-  metre and **yard** ÔÇö so fabric and other length-based goods can be sold in
+  metre and **yard** — so fabric and other length-based goods can be sold in
   fractional yards.
-- **Auditable stock ledger** ÔÇö every quantity change (opening stock, receipts,
+- **Auditable stock ledger** — every quantity change (opening stock, receipts,
   sales, returns, damage, loss, expiry, count corrections, imports, reversals)
   is a `StockMovement` row with before/after quantities and a business date.
-- **Safe selling** ÔÇö multi-item baskets, line discounts, payment methods,
+- **Safe selling** — multi-item baskets, line discounts, payment methods,
   atomic conditional stock deduction that prevents overselling, and idempotency
   keys so a retried completion cannot double-charge or double-deduct.
-- **Permanent history** ÔÇö sales are never deleted. Corrections are partial
+- **Permanent history** — sales are never deleted. Corrections are partial
   refunds, full refunds or reversals, each restocking (optionally) and adjusting
   revenue on the correct business date.
-- **Automatic daily reports** ÔÇö CSV + XLSX bundles per business date with
+- **Automatic daily reports** — CSV + XLSX bundles per business date with
   catch-up at startup, every five minutes while open, or from Windows Task
   Scheduler when the app is closed.
-- **Fast startup** ÔÇö pages are created only when first opened, so a cashier
+- **Fast startup** — pages are created only when first opened, so a cashier
   never pays for building inventory, reports or admin screens, and SQLite runs
   with a larger page cache and memory-mapped reads.
-- **Backups that can be trusted** ÔÇö SQLite online-backup API, SHA-256 manifest,
+- **Backups that can be trusted** — SQLite online-backup API, SHA-256 manifest,
   integrity validation before restore, automatic pre-restore safety copy and
   restore rollback if the restored file fails.
-- **Transactional imports** ÔÇö CSV/XLSX preview with per-row errors, duplicate
+- **Transactional imports** — CSV/XLSX preview with per-row errors, duplicate
   detection, rejected-row export, and add / update / upsert / privileged replace
   modes that commit all-or-nothing.
 
@@ -96,27 +96,27 @@ a password of at least 8 characters). Sign in with that account afterwards.
 
 | Section | Admin | Owner | Base user |
 | --- | :---: | :---: | :---: |
-| Dashboard | Ô£ô | Ô£ô | Ô£ô |
-| Inventory (view/add/edit) | Ô£ô | Ô£ô | |
-| Import Stock | Ô£ô | Ô£ô | |
-| Stock Receiving / Adjustments | Ô£ô | Ô£ô | |
-| Record Sale | Ô£ô | Ô£ô | Ô£ô |
-| Transactions | Ô£ô | Ô£ô | read-only |
-| Refunds / reversals | Ô£ô | Ô£ô | |
-| Reports & Exports / Monthly Summary | Ô£ô | Ô£ô | |
-| Audit Log | Ô£ô | | |
-| Users | Ô£ô | read-only | |
-| Roles & permissions | Ô£ô | read-only | |
-| Settings and backups | Ô£ô | | |
-| Change own password | Ô£ô | Ô£ô | Ô£ô |
+| Dashboard | ✓ | ✓ | ✓ |
+| Inventory (view/add/edit) | ✓ | ✓ | |
+| Import Stock | ✓ | ✓ | |
+| Stock Receiving / Adjustments | ✓ | ✓ | |
+| Record Sale | ✓ | ✓ | ✓ |
+| Transactions | ✓ | ✓ | read-only |
+| Refunds / reversals | ✓ | ✓ | |
+| Reports & Exports / Monthly Summary | ✓ | ✓ | |
+| Audit Log | ✓ | | |
+| Users | ✓ | read-only | |
+| Roles & permissions | ✓ | read-only | |
+| Settings and backups | ✓ | | |
+| Change own password | ✓ | ✓ | ✓ |
 
 The Admin can create **custom roles** under **Roles & permissions** and tick
 exactly what each role can do and see.  The two built-in roles can also have
 their permissions adjusted, but their names stay fixed.  The Admin role always
 keeps full access and cannot be edited or deleted.
 
-The default Owner has every operational permission ÔÇö including sales, refunds,
-inventory, reports, users and roles (both read-only) and monthly summaries ÔÇö but
+The default Owner has every operational permission — including sales, refunds,
+inventory, reports, users and roles (both read-only) and monthly summaries — but
 cannot open Settings or Audit, and cannot edit roles.  The default Base user sees
 the dashboard, can record sales, and sees transaction history read-only.  Role
 editing is deliberately admin-only so an Owner cannot grant themselves Settings
@@ -131,7 +131,7 @@ logged).
 ## Where data lives
 
 StockKeep is portable: everything writable is kept in the **application folder**
-ÔÇö the project root when running from source (or from this project's
+— the project root when running from source (or from this project's
 `dist\StockKeep.exe`), and otherwise the folder containing `StockKeep.exe`.
 Nothing is written to `%LOCALAPPDATA%`, `%APPDATA%` or the user profile.
 
@@ -144,7 +144,7 @@ Nothing is written to `%LOCALAPPDATA%`, `%APPDATA%` or the user profile.
 | Logs | `<app folder>\logs\stockkeep.log` |
 | Exports | `<app folder>\exports\` |
 
-Set `STOCKKEEP_HOME` (or pass `--home PATH`) to use a different home directory ÔÇö
+Set `STOCKKEEP_HOME` (or pass `--home PATH`) to use a different home directory —
 useful for a shared drive, a USB stick or tests. Report and backup folders can
 also be changed independently in **Settings**.
 
@@ -154,31 +154,31 @@ removed only after a successful copy).
 
 ## The thirteen sections
 
-1. **Dashboard** ÔÇö today's net sales, transaction count, inventory value, stock
+1. **Dashboard** — today's net sales, transaction count, inventory value, stock
    alerts, 14-day sales trend, low-stock list and recent transactions.
-2. **Inventory** ÔÇö search/filter/paginate products, create and edit items,
+2. **Inventory** — search/filter/paginate products, create and edit items,
    archive/restore, export the current view.
-3. **Import Stock** ÔÇö choose CSV/XLSX, preview validation results, pick a mode,
+3. **Import Stock** — choose CSV/XLSX, preview validation results, pick a mode,
    apply, and export rejected rows.
-4. **Record Sale** ÔÇö searchable product picker, basket with quantities and line
+4. **Record Sale** — searchable product picker, basket with quantities and line
    discounts, payment method, notes, atomic completion and a receipt.
-5. **Transactions** ÔÇö every sale with status; view details, refund/reverse,
+5. **Transactions** — every sale with status; view details, refund/reverse,
    export the filtered range, print/reopen receipts.
-6. **Stock Receiving** ÔÇö receive stock from a supplier, update the cost price
+6. **Stock Receiving** — receive stock from a supplier, update the cost price
    and record a reference/note.
-7. **Stock Adjustments** ÔÇö record damage, loss, expiry or a physical count
+7. **Stock Adjustments** — record damage, loss, expiry or a physical count
    correction, always with a reason.
-8. **Reports & Exports** ÔÇö daily job status, regenerate/open bundles, and export
+8. **Reports & Exports** — daily job status, regenerate/open bundles, and export
    sales, daily summaries, stock movements, inventory, low stock, product
    performance and audit logs for any date range.
-9. **Monthly Summary** ÔÇö reconcile monthly sales, COGS, profit, payments, stock
+9. **Monthly Summary** — reconcile monthly sales, COGS, profit, payments, stock
    movements and per-product performance; export XLSX or a CSV set.
-10. **Audit Log** ÔÇö who changed what, when, with reasons and JSON details.
-11. **Users** ÔÇö see accounts and their roles; Admins can create accounts,
+10. **Audit Log** — who changed what, when, with reasons and JSON details.
+11. **Users** — see accounts and their roles; Admins can create accounts,
     choose any role, activate/deactivate and reset passwords.
-12. **Roles & permissions** ÔÇö create custom roles and tick the exact sections
+12. **Roles & permissions** — create custom roles and tick the exact sections
     and actions each role may use (Admin only; the Admin role is immutable).
-13. **Settings** ÔÇö business name, currency, timezone, closing time, theme,
+13. **Settings** — business name, currency, timezone, closing time, theme,
     page size, storage folders, backup policy, scheduled task and diagnostics
     (Admin only).
 
@@ -217,10 +217,10 @@ Required columns (aliases are matched case-insensitively):
 Preview flags missing names, non-numeric/negative values, invalid product IDs,
 duplicate rows in the file and rows that update the same product twice. Modes:
 
-- **Add new** ÔÇö create only rows that do not match an existing product.
-- **Update existing** ÔÇö update matched products and set their quantity.
-- **Upsert** ÔÇö create or update.
-- **Replace inventory** ÔÇö update/create the listed products and archive all
+- **Add new** — create only rows that do not match an existing product.
+- **Update existing** — update matched products and set their quantity.
+- **Upsert** — create or update.
+- **Replace inventory** — update/create the listed products and archive all
   other active products (their stock is removed with an audited movement). This
   mode requires explicit confirmation and a file with no rejected rows.
 
@@ -233,10 +233,10 @@ For every closed business date StockKeep writes four files:
 
 ```
 reports/YYYY/MM/DD/
-Ôö£ÔöÇÔöÇ transactions_YYYY-MM-DD.csv
-Ôö£ÔöÇÔöÇ transactions_YYYY-MM-DD.xlsx   # Transactions, Daily Summary, Stock Movements
-Ôö£ÔöÇÔöÇ stock_movements_YYYY-MM-DD.csv
-ÔööÔöÇÔöÇ daily_summary_YYYY-MM-DD.xlsx  # Daily Summary, Stock Movements
+├── transactions_YYYY-MM-DD.csv
+├── transactions_YYYY-MM-DD.xlsx   # Transactions, Daily Summary, Stock Movements
+├── stock_movements_YYYY-MM-DD.csv
+└── daily_summary_YYYY-MM-DD.xlsx  # Daily Summary, Stock Movements
 ```
 
 Header rows are row 1 in every sheet so the files are directly machine-readable.
@@ -253,7 +253,7 @@ and uses a lock file so two runs cannot write the same bundle concurrently.
 
 ### Windows Task Scheduler
 
-From **Settings ÔåÆ Automatic daily reports** choose *Install task* (or run
+From **Settings → Automatic daily reports** choose *Install task* (or run
 `StockKeep.exe --install-task`). The task runs at the configured closing time:
 
 ```powershell
@@ -347,29 +347,29 @@ winget install --id JRSoftware.InnoSetup -e
 
 ```
 src/stockkeep/
-Ôö£ÔöÇÔöÇ models.py           SQLAlchemy models, constants, money/qty properties
-Ôö£ÔöÇÔöÇ db.py               engine pragmas, schema versioning, migrations, seed
-Ôö£ÔöÇÔöÇ money.py            Decimal/minor-unit conversion and formatting
-Ôö£ÔöÇÔöÇ timeutil.py         timezone-aware business dates and closing times
-Ôö£ÔöÇÔöÇ atomic.py           SAVEPOINT decorator for all-or-nothing services
-Ôö£ÔöÇÔöÇ services/
-Ôöé   Ôö£ÔöÇÔöÇ catalog.py      product CRUD, paging, history
-Ôöé   Ôö£ÔöÇÔöÇ stock.py        receiving, adjustments, returns, ledger writes
-Ôöé   Ôö£ÔöÇÔöÇ sales.py        baskets, atomic deduction, refunds, reversals
-Ôöé   Ôö£ÔöÇÔöÇ imports.py      parsing, validation, preview, apply, templates
-Ôöé   Ôö£ÔöÇÔöÇ analytics.py    dashboard, summaries, transaction/movement queries
-Ôöé   Ôö£ÔöÇÔöÇ reports.py      daily bundles, exports, monthly workbooks
-Ôöé   Ôö£ÔöÇÔöÇ scheduler.py    catch-up, lock, Task Scheduler integration
-Ôöé   Ôö£ÔöÇÔöÇ backup.py       backup, verify, restore, prune, auto-backup
-Ôöé   Ôö£ÔöÇÔöÇ audit.py        audit events with JSON-safe details
-Ôöé   ÔööÔöÇÔöÇ settings_service.py
-ÔööÔöÇÔöÇ ui/
-    Ôö£ÔöÇÔöÇ main_window.py  sidebar, stacked pages, shortcuts, maintenance timer
-    Ôö£ÔöÇÔöÇ theme.py        light/dark palettes and QSS
-    Ôö£ÔöÇÔöÇ widgets.py      cards, KPI tiles, tables, pagination, bar chart
-    Ôö£ÔöÇÔöÇ dialogs.py      product/sale/refund/receipt/audit dialogs
-    Ôö£ÔöÇÔöÇ workers.py      QThreadPool workers with progress dialogs
-    ÔööÔöÇÔöÇ pages/          one module per navigation section
+├── models.py           SQLAlchemy models, constants, money/qty properties
+├── db.py               engine pragmas, schema versioning, migrations, seed
+├── money.py            Decimal/minor-unit conversion and formatting
+├── timeutil.py         timezone-aware business dates and closing times
+├── atomic.py           SAVEPOINT decorator for all-or-nothing services
+├── services/
+│   ├── catalog.py      product CRUD, paging, history
+│   ├── stock.py        receiving, adjustments, returns, ledger writes
+│   ├── sales.py        baskets, atomic deduction, refunds, reversals
+│   ├── imports.py      parsing, validation, preview, apply, templates
+│   ├── analytics.py    dashboard, summaries, transaction/movement queries
+│   ├── reports.py      daily bundles, exports, monthly workbooks
+│   ├── scheduler.py    catch-up, lock, Task Scheduler integration
+│   ├── backup.py       backup, verify, restore, prune, auto-backup
+│   ├── audit.py        audit events with JSON-safe details
+│   └── settings_service.py
+└── ui/
+    ├── main_window.py  sidebar, stacked pages, shortcuts, maintenance timer
+    ├── theme.py        light/dark palettes and QSS
+    ├── widgets.py      cards, KPI tiles, tables, pagination, bar chart
+    ├── dialogs.py      product/sale/refund/receipt/audit dialogs
+    ├── workers.py      QThreadPool workers with progress dialogs
+    └── pages/          one module per navigation section
 ```
 
 ### Database rules
@@ -425,8 +425,8 @@ Do not attach a real database, backup, report or log to an issue.
 
 ## License
 
-MIT ÔÇö see [LICENSE](LICENSE).
+MIT — see [LICENSE](LICENSE).
 
 ## Version
 
-StockKeep 1.2.0 ÔÇö schema version 4.
+StockKeep 1.2.0 — schema version 4.
