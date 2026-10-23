@@ -34,10 +34,39 @@ jobs:
       - name: Install Inno Setup
         run: choco install innosetup --yes --no-progress
 
+      - name: Show build tool paths
+        shell: pwsh
+        run: |
+          python --version
+          Get-ChildItem "C:\Program Files (x86)" -Directory -ErrorAction SilentlyContinue |
+            Where-Object Name -like "*Inno*" | Select-Object FullName
+          Get-ChildItem "C:\Program Files" -Directory -ErrorAction SilentlyContinue |
+            Where-Object Name -like "*Inno*" | Select-Object FullName
+
       - name: Build exe and installer
+        shell: pwsh
+        run: |
+          $output = & powershell -ExecutionPolicy Bypass -File .\build-setup.ps1 2>&1
+          $code = $LASTEXITCODE
+          $output | Out-File -FilePath build.log -Encoding utf8
+          $output
+          if ($code -ne 0) {
+            "## Build failed with exit code $code" | Out-File -FilePath $env:GITHUB_STEP_SUMMARY -Append
+            "``````" | Out-File -FilePath $env:GITHUB_STEP_SUMMARY -Append
+            $output | Select-Object -Last 100 | Out-File -FilePath $env:GITHUB_STEP_SUMMARY -Append
+            "``````" | Out-File -FilePath $env:GITHUB_STEP_SUMMARY -Append
+            exit $code
+          }
         env:
           QT_QPA_PLATFORM: offscreen
-        run: powershell -ExecutionPolicy Bypass -File .\build-setup.ps1
+
+      - name: Upload build log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-log
+          path: build.log
+          if-no-files-found: ignore
 
       - name: Publish installer to GitHub Releases
         shell: pwsh
