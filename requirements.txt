@@ -1,0 +1,4 @@
+PySide6==6.12.0
+SQLAlchemy>=2.0.30,<2.2
+openpyxl>=3.1.2,<3.2
+tzdata>=2024.1

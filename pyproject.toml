@@ -1,0 +1,28 @@
+[project]
+name = "stockkeep"
+version = "1.2.0"
+description = "StockKeep - native desktop inventory management for Windows"
+requires-python = ">=3.12"
+dependencies = [
+    "PySide6>=6.6",
+    "SQLAlchemy>=2.0.30,<2.2",
+    "openpyxl>=3.1.2,<3.2",
+    "tzdata>=2024.1",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0", "pytest-qt>=4.4", "pyinstaller>=6.10"]
+
+[project.scripts]
+stockkeep = "stockkeep.__main__:main"
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+addopts = "-q"
+filterwarnings = [
+    "ignore::DeprecationWarning",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
